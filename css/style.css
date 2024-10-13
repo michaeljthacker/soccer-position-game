@@ -48,6 +48,11 @@ body, html {
     flex-direction: column;
 }
 
+/* Add margin above the h1 element */
+h1 {
+    margin-top: 20px; /* Adjust the value as needed */
+}
+
 /* Center the field and make it responsive */
 #game-screen {
     flex: 1;
