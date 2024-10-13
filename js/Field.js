@@ -59,16 +59,4 @@ export class Field {
             }
         }
     }
-
-    // Method to handle the role selector creation
-    createRoleSelector(playerRoles, handleRoleSelection) {
-        const roleSelector = document.getElementById('role-selector');
-        playerRoles.forEach(role => {
-            const option = document.createElement('option');
-            option.value = role;
-            option.textContent = role.charAt(0).toUpperCase() + role.slice(1);
-            roleSelector.appendChild(option);
-        });
-        document.getElementById('start-game-btn').addEventListener('click', handleRoleSelection);
-    }
 }

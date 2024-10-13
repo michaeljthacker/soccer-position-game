@@ -1,4 +1,4 @@
-// Goalkeeper.js
+// Goalie.js
 import { Player } from './Player.js';
 import { getDistance } from './utilities.js';  // Import the utility function
 
