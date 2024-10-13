@@ -3,18 +3,24 @@
     fill: #4CAF50; /* Green color for the field */
 }
 
+/* White color for field lines */
+.field-line {
+    stroke: white;
+    stroke-width: 2;
+}
+
 /* Blue color for goals */
 .goal {
-    fill: blue; /* Changed to blue */
-    stroke: var(--bs-white);
+    fill: blue;
+    stroke: white;
     stroke-width: 0.2;
 }
 
 /* Interactive grid cells */
 .grid-cell {
     fill: transparent;
-    stroke: white; /* Changed to white */
-    stroke-width: 0.5; /* Changed to 0.5 */
+    stroke: white;
+    stroke-width: 0.5;
     cursor: pointer;
 }
 
@@ -83,25 +89,6 @@ button:hover {
     text-align: center;
 }
 
-/* Additional styles from the suggested code change */
-#soccer-field {
-    border: 2px solid white;
-    max-width: 100%;
-    max-height: 100%;
-    aspect-ratio: 3 / 2; /* Maintain aspect ratio of 3:2 */
-}
-
-.field-line {
-    stroke: white;
-    stroke-width: 2;
-}
-
-.player {
-    fill: red;
-    stroke: black;
-    stroke-width: 1;
-}
-
 /* Center the field and make it responsive */
 #game-screen {
     display: flex;
@@ -109,4 +96,17 @@ button:hover {
     align-items: center;
     height: 100vh;
     width: 100vw;
+}
+
+#soccer-field {
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 2 / 1; /* Maintain aspect ratio of 2:1 */
+    border: 2px solid white; /* Add border to visualize the field */
+}
+
+.player {
+    fill: red;
+    stroke: black;
+    stroke-width: 1;
 }

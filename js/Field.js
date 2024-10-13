@@ -1,7 +1,7 @@
 export class Field {
-    constructor(fieldWidth, fieldHeight, cellSize, soccerField) {
-        this.fieldWidth = fieldWidth;
-        this.fieldHeight = fieldHeight;
+    constructor(fieldWidth, fieldLength, cellSize, soccerField) {
+        this.fieldWidth = fieldWidth; // Vertical space
+        this.fieldLength = fieldLength; // Horizontal space
         this.cellSize = cellSize;
         this.soccerField = soccerField;  // Reference to the SVG element in the DOM
     }
@@ -11,22 +11,22 @@ export class Field {
         const field = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         field.setAttribute('x', '0');
         field.setAttribute('y', '0');
-        field.setAttribute('width', this.fieldWidth);
-        field.setAttribute('height', this.fieldHeight);
+        field.setAttribute('width', this.fieldLength);
+        field.setAttribute('height', this.fieldWidth);
         field.setAttribute('class', 'field-background');
         this.soccerField.appendChild(field);
 
         const centerLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        centerLine.setAttribute('x1', this.fieldWidth / 2);
+        centerLine.setAttribute('x1', this.fieldLength / 2);
         centerLine.setAttribute('y1', '0');
-        centerLine.setAttribute('x2', this.fieldWidth / 2);
-        centerLine.setAttribute('y2', this.fieldHeight);
+        centerLine.setAttribute('x2', this.fieldLength / 2);
+        centerLine.setAttribute('y2', this.fieldWidth);
         centerLine.setAttribute('class', 'field-line');
         this.soccerField.appendChild(centerLine);
 
         const centerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        centerCircle.setAttribute('cx', this.fieldWidth / 2);
-        centerCircle.setAttribute('cy', this.fieldHeight / 2);
+        centerCircle.setAttribute('cx', this.fieldLength / 2);
+        centerCircle.setAttribute('cy', this.fieldWidth / 2);
         centerCircle.setAttribute('r', 5);
         centerCircle.setAttribute('class', 'field-line');
         centerCircle.setAttribute('fill', 'none');
@@ -46,8 +46,8 @@ export class Field {
 
     // Method to create a grid on the soccer field for interactive positioning
     createGrid(handleCellClick) {
-        for (let x = 0; x < this.fieldWidth; x += this.cellSize) {
-            for (let y = 0; y < this.fieldHeight; y += this.cellSize) {
+        for (let x = 0; x < this.fieldLength; x += this.cellSize) {
+            for (let y = 0; y < this.fieldWidth; y += this.cellSize) {
                 const cell = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                 cell.setAttribute('x', x);
                 cell.setAttribute('y', y);
