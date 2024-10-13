@@ -33,6 +33,39 @@ form {
     margin: 20px auto;
 }
 
+/* Flexbox container for the entire page */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main container for the game interface */
+.container-fluid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Center the field and make it responsive */
+#game-screen {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Add some margin to separate from the header */
+}
+
+#soccer-field {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 2 / 1; /* Maintain aspect ratio of 2:1 */
+    border: 2px solid white; /* Add border to visualize the field */
+}
+
 /* General text styling */
 body {
     font-family: 'Arial', sans-serif;
@@ -87,22 +120,6 @@ button:hover {
 /* Centering the form */
 #start-screen {
     text-align: center;
-}
-
-/* Center the field and make it responsive */
-#game-screen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-}
-
-#soccer-field {
-    max-width: 100%;
-    max-height: 100%;
-    aspect-ratio: 2 / 1; /* Maintain aspect ratio of 2:1 */
-    border: 2px solid white; /* Add border to visualize the field */
 }
 
 .player {
