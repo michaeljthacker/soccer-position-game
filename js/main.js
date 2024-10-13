@@ -17,18 +17,18 @@ document.getElementById('role-selection-form').addEventListener('submit', functi
 
 // Main function to set up the game
 function setupGame(userRole) {
-    const fieldWidth = 50;
-    const fieldHeight = 100;
+    const fieldWidth = 50; // Vertical space
+    const fieldLength = 100; // Horizontal space
     const cellSize = 1;
 
     const soccerField = document.getElementById('soccer-field');
-    const field = new Field(fieldWidth, fieldHeight, cellSize, soccerField);
+    const field = new Field(fieldWidth, fieldLength, cellSize, soccerField);
     field.createField();
-    field.createGoal((fieldWidth - 10) / 2, 0, 10, 1);
-    field.createGoal((fieldWidth - 10) / 2, fieldHeight - 1, 10, 1);
+    field.createGoal(0, (fieldWidth - 10) / 2, 1, 10); // Corrected goal position
+    field.createGoal(fieldLength - 1, (fieldWidth - 10) / 2, 1, 10); // Corrected goal position
     field.createGrid((x, y) => console.log(`Cell clicked at (${x}, ${y})`));
 
-    const playerManager = new PlayerManager(fieldWidth, fieldHeight, userRole);
+    const playerManager = new PlayerManager(fieldWidth, fieldLength, userRole);
     playerManager.initializePlayers();
     playerManager.renderPlayers(soccerField);
 }
