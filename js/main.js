@@ -1,4 +1,4 @@
-// script.js
+// main.js
 document.getElementById('role-selection-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const selectedRole = document.getElementById('role').value;
