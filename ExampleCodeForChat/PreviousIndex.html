@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Soccer Positioning Game</title>
+    <!-- Bootstrap CSS with Replit dark theme -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <!-- Custom CSS for the game -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+</head>
+<body>
+    <!-- Main container for the game interface -->
+    <div class="container-fluid">
+        <!-- Game title -->
+        <h1 class="text-center mb-4">2D Soccer Positioning Game</h1>
+        
+        <!-- Start screen -->
+        <div id="start-screen" class="text-center">
+            <h2 class="mb-3">Select Your Role</h2>
+            <div class="mb-3">
+                <select id="role-selector" class="form-select">
+                    <option value="">Choose a role...</option>
+                </select>
+            </div>
+            <button id="start-game-btn" class="btn btn-primary">Start Game</button>
+        </div>
+
+        <!-- Game screen (initially hidden) -->
+        <div id="game-screen" class="d-none">
+            <!-- Container for the soccer field SVG -->
+            <div id="soccer-field-container">
+                <!-- 
+                    SVG element representing the soccer field
+                    viewBox="0 0 100 50": Sets the coordinate system for the SVG
+                    preserveAspectRatio="xMidYMid meet": Maintains aspect ratio while centering the content
+                -->
+                <svg id="soccer-field" viewBox="0 0 100 50" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript file for game logic -->
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
