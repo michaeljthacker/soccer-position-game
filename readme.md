@@ -123,11 +123,11 @@ This section outlines the key steps and the recommended order of operations for 
   - Create instances of the **Player** subclasses for each role (Goalkeeper, Defender, Forward, Midfielder).
   - Separate players into the user’s team and the opposing team.
 
-### 3. Determine the Attacking Side
-- **Objective**: Randomly select which side the user's team is attacking.
+### 3. Determine and clearly label the Attacking Side (Completed)
+- **Objective**: Randomly determine which side the user's team will be attacking and clearly label it on the interface.
 - **Tasks**:
-  - In the first half of the game, randomly assign whether the team is attacking the top or bottom side of the field.
-  - In the second half, switch the attacking side automatically.
+  - Randomly choose between "zero" and "length" as the attack end.
+  - Display an arrow and label indicating the direction of attack above the field and below the game title.
 
 ### 4. Place the Ball
 - **Objective**: Randomly place the ball on the field at the start of each turn.

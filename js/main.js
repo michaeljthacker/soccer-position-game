@@ -2,6 +2,9 @@
 import { Field } from './Field.js';
 import { PlayerManager } from './PlayerManager.js';
 
+let userAttackDirection; // Public constant for attack direction
+let currentTurn = 1; // Initial turn
+
 // Function to handle role selection and start the game
 document.getElementById('role-selection-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -9,6 +12,7 @@ document.getElementById('role-selection-form').addEventListener('submit', functi
     if (selectedRole) {
         document.getElementById('start-screen').classList.add('d-none');
         document.getElementById('game-screen').classList.remove('d-none');
+        document.getElementById('attack-direction').classList.remove('d-none'); // Show attack direction
         setupGame(selectedRole);
     } else {
         alert('Please select a role.');
@@ -31,4 +35,17 @@ function setupGame(userRole) {
     const playerManager = new PlayerManager(fieldWidth, fieldLength, userRole);
     playerManager.initializePlayers();
     playerManager.renderPlayers(soccerField);
+
+    // Determine the attack direction
+    userAttackDirection = Math.random() < 0.5 ? 'zero' : 'length';
+    displayUserAttackDirection(userAttackDirection);
+}
+
+function displayUserAttackDirection(attackEnd) {
+    const attackDirection = document.getElementById('attack-direction');
+    if (attackEnd === 'length') {
+        attackDirection.innerHTML = 'ATTACK →';
+    } else {
+        attackDirection.innerHTML = '← ATTACK';
+    }
 }
