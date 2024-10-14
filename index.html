@@ -1,15 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soccer Positioning Game</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Bootstrap CSS with Replit dark theme -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <!-- Primary CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Add favicon -->
+    <link rel="icon" href="assets/favicon.png" type="image/png">
 </head>
 <body>
-    <h1>Soccer Positioning Game</h1>
-    <div id="soccer-field"></div>
+    <!-- Main container for the game interface -->
+    <div class="container-fluid">
+        <!-- Game title -->
+        <h1 class="text-center mb-4">Soccer Positioning Game</h1>
+        
+        <!-- Start screen -->
+        <div id="start-screen" class="text-center">
+            <h2 class="mb-3">Select Your Role</h2>
+            <form id="role-selection-form">
+                <div class="mb-3">
+                    <label for="role" class="form-label">Choose a role:</label>
+                    <select id="role" name="role" class="form-select">
+                        <option value="">Choose a role...</option>
+                        <option value="goalie">Goalie</option>
+                        <option value="left-defender">Left Defender</option>
+                        <option value="right-defender">Right Defender</option>
+                        <option value="midfielder">Midfielder</option>
+                        <option value="left-forward">Left Forward</option>
+                        <option value="center-forward">Center Forward</option>
+                        <option value="right-forward">Right Forward</option>
+                    </select>
+                </div>
+                <button type="submit" id="start-game-btn" class="btn btn-primary">Start Game</button>
+            </form>
+        </div>
 
-    <script src="script.js"></script>
+        <!-- Game screen (initially hidden) -->
+        <div id="game-screen" class="d-none">
+            <svg id="soccer-field" width="100" height="50"></svg> <!-- Updated dimensions -->
+        </div>
+    </div>
+
+    <!-- Primary JavaScript -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -10,9 +10,14 @@ export class Player {
         this.fieldWidth = fieldWidth;  // Width of the field (stored as a property)
         this.fieldLength = fieldLength;  // Length of the field (stored as a property)
         this.attackEnd = attackEnd;  // "zero" or "length" based on attacking direction
+        this.x = null; // position coordinate x (field width)
+        this.y = null; // position coordinate y (field length)
     }
-    
-    // Each subclass will define its own positioning and movement logic
+
+    setPosition(x, y) {
+        this.x = x;
+        this.y = y;
+    }
 
     // Method to get the attacking goal position (Y coordinate) based on the attack end
     getAttackingGoalY() {

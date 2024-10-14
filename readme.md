@@ -109,13 +109,13 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 This section outlines the key steps and the recommended order of operations for building out the functionality of the soccer positioning game. The goal is to complete each of these steps incrementally, ensuring that each part of the game functions properly before moving on to the next.
 
-### 1. Role Selection
+### 1. Role Selection (Completed)
 - **Objective**: Allow the user to select their role (Goalkeeper, Left/Right Defender, Left/Right/Center Forward, or Midfielder) before starting the game.
 - **Tasks**:
   - Create a simple dropdown or button set in **index.html** for role selection.
   - Capture the user's role selection and store it for the game session.
 
-### 2. Set Up the Field and Initialize All Players
+### 2. Set Up the Field and Initialize All Players (Completed)
 - **Objective**: Initialize and display the soccer field, its boundaries, grid, goals, and instantiate all players (both user and non-user players).
 - **Tasks**:
   - Use **script.js** to render the field with the appropriate dimensions, grid, and goals at both ends of the field.
