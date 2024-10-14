@@ -115,7 +115,7 @@ This section outlines the key steps and the recommended order of operations for 
   - Create a simple dropdown or button set in **index.html** for role selection.
   - Capture the user's role selection and store it for the game session.
 
-### 2. Set Up the Field and Initialize All Players
+### 2. Set Up the Field and Initialize All Players (Completed)
 - **Objective**: Initialize and display the soccer field, its boundaries, grid, goals, and instantiate all players (both user and non-user players).
 - **Tasks**:
   - Use **script.js** to render the field with the appropriate dimensions, grid, and goals at both ends of the field.
