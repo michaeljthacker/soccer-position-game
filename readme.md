@@ -172,11 +172,11 @@ This section outlines the key steps and the recommended order of operations for 
   - Display a clickable grid for the user to select their position based on the current layout.
   - Provide visual feedback to show the user's selected position.
 
-### 10. Scoring and Feedback
+### 10. Position Scoring
 - **Objective**: Score the user’s positioning for each turn based on how close they are to their calculated ideal position.
 - **Tasks**:
   - Compare the user’s chosen position to the ideal position (calculated based on the logic for their role).
-  - Provide a score (e.g., 0-10) based on proximity and some measure of how critical positioning is (e.g., proximity to ball as a modifier of how precise positioning needs to be), and give feedback on the correct location.
+  - Provide a score (e.g., 0-10) based on proximity and some measure of how critical positioning is (e.g., proximity to ball as a modifier of how precise positioning needs to be).
 
 ### 11. Repeat for First Half
 - **Objective**: Run multiple turns for the first half of the game.
@@ -195,6 +195,11 @@ This section outlines the key steps and the recommended order of operations for 
 - **Tasks**:
   - Show the final score and display celebratory animations based on the user’s total score.
   - Provide a “Restart Game” button to allow the user to play again.
+
+## Backlog & Potential Features
+- Design / Fill of the ball (vs. plain white)
+- Description of the role / instructions before clicking "Start Game"
+- Give feedback on the correct location, *e.g.*, "Keep your spacing away from teammates!"
 
 ---
 

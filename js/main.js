@@ -1,6 +1,7 @@
 // main.js
 import { Field } from './Field.js';
 import { PlayerManager } from './PlayerManager.js';
+import { Ball } from './Ball.js';
 
 let userAttackDirection; // Public constant for attack direction
 let currentTurn = 1; // Initial turn
@@ -32,13 +33,18 @@ function setupGame(userRole) {
     field.createGoal(fieldLength - 1, (fieldWidth - 10) / 2, 1, 10); // Corrected goal position
     field.createGrid((x, y) => console.log(`Cell clicked at (${x}, ${y})`));
 
-    const playerManager = new PlayerManager(fieldWidth, fieldLength, userRole);
-    playerManager.initializePlayers();
-    playerManager.renderPlayers(soccerField);
-
     // Determine the attack direction
     userAttackDirection = Math.random() < 0.5 ? 'zero' : 'length';
     displayUserAttackDirection(userAttackDirection);
+
+    // Place the ball randomly on the field
+    const ball = new Ball(fieldWidth, fieldLength);
+    ball.placeRandomly();
+    ball.render(soccerField);
+
+    const playerManager = new PlayerManager(fieldWidth, fieldLength, userRole);
+    playerManager.initializePlayers();
+    playerManager.renderPlayers(soccerField);
 }
 
 function displayUserAttackDirection(attackEnd) {
