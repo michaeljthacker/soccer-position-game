@@ -46,9 +46,9 @@ function setupGame(userRole) {
 // Function to setup each turn
 function setupTurn(soccerField, fieldWidth, fieldLength, playerManager, initialUserAttackDirection) {
     // Display the user's attack direction
-    userAttackDirection = updateUserAttackDirection(initialUserAttackDirection, currentTurn)
-    displayUserAttackDirection(userAttackDirection);
-    playerManager.updateAttackEnd(userAttackDirection)
+    userAttackDirection = updateUserAttackDirection(initialUserAttackDirection, currentTurn) // Update attack direction for user
+    displayUserAttackDirection(userAttackDirection); // Display attack direction for user
+    playerManager.updateAttackEnd(userAttackDirection); // Update attack end for each player
 
     // Place the ball randomly on the field
     const ball = new Ball(fieldWidth, fieldLength);
@@ -56,8 +56,6 @@ function setupTurn(soccerField, fieldWidth, fieldLength, playerManager, initialU
     ball.render(soccerField);
 
     // Position and render non-user players
-    const goalX = userAttackDirection === 'zero' ? 0 : fieldLength;
-    const goalY = fieldWidth / 2;
     playerManager.placeGoalies(ball.x, ball.y);
     playerManager.renderNonUserPlayers(soccerField);
 }

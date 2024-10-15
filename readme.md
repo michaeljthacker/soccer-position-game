@@ -202,6 +202,7 @@ This section outlines the key steps and the recommended order of operations for 
 - Give feedback on the correct location, *e.g.*, "Keep your spacing away from teammates!"
 - I think we can delete Player class properties related to field size
 - Customize player icons
+- Refactor calculateIdealPosition() so every Player subclass takes the same inputs, then replace placeGoalies(), placeForwards(), etc. with a single reusable function.
 ---
 
 ### Notes:
