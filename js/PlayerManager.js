@@ -3,6 +3,7 @@ import { Goalie } from './Goalie.js';
 import { Defender } from './Defender.js';
 import { Midfielder } from './Midfielder.js';
 import { Forward } from './Forward.js';
+import { generateNormalRandom, clamp } from './utilities.js';
 
 class PlayerManager {
     constructor(fieldWidth, fieldLength, userRole) {
@@ -14,30 +15,65 @@ class PlayerManager {
 
     initializePlayers() {
         const userTeam = [
-            { role: 'Goalie', isUser: this.userRole === 'goalie', isOnUserTeam: true, x: null, y: null },
-            { role: 'Defender', isUser: this.userRole === 'left-defender', isOnUserTeam: true, x: null, y: null, side: 'left' },
-            { role: 'Defender', isUser: this.userRole === 'right-defender', isOnUserTeam: true, x: null, y: null, side: 'right' },
-            { role: 'Midfielder', isUser: this.userRole === 'midfielder', isOnUserTeam: true, x: null, y: null },
-            { role: 'Forward', isUser: this.userRole === 'left-forward', isOnUserTeam: true, x: null, y: null, side: 'left' },
-            { role: 'Forward', isUser: this.userRole === 'center-forward', isOnUserTeam: true, x: null, y: null, side: 'center' },
-            { role: 'Forward', isUser: this.userRole === 'right-forward', isOnUserTeam: true, x: null, y: null, side: 'right' }
+            new Goalie(this.userRole === 'goalie', true, 'Goalie', this.fieldWidth, this.fieldLength),
+            new Defender(this.userRole === 'left-defender', true, 'Defender', this.fieldWidth, this.fieldLength, 'left'),
+            new Defender(this.userRole === 'right-defender', true, 'Defender', this.fieldWidth, this.fieldLength, 'right'),
+            new Midfielder(this.userRole === 'midfielder', true, 'Midfielder', this.fieldWidth, this.fieldLength),
+            new Forward(this.userRole === 'left-forward', true, 'Forward', this.fieldWidth, this.fieldLength, 'left'),
+            new Forward(this.userRole === 'center-forward', true, 'Forward', this.fieldWidth, this.fieldLength, 'center'),
+            new Forward(this.userRole === 'right-forward', true, 'Forward', this.fieldWidth, this.fieldLength, 'right')
         ];
 
         const opposingTeam = [
-            { role: 'Goalie', isUser: false, isOnUserTeam: false, x: null, y: null },
-            { role: 'Defender', isUser: false, isOnUserTeam: false, x: null, y: null, side: 'left' },
-            { role: 'Defender', isUser: false, isOnUserTeam: false, x: null, y: null, side: 'right' },
-            { role: 'Midfielder', isUser: false, isOnUserTeam: false, x: null, y: null },
-            { role: 'Forward', isUser: false, isOnUserTeam: false, x: null, y: null, side: 'left' },
-            { role: 'Forward', isUser: false, isOnUserTeam: false, x: null, y: null, side: 'center' },
-            { role: 'Forward', isUser: false, isOnUserTeam: false, x: null, y: null, side: 'right' }
+            new Goalie(false, false, 'Goalie', this.fieldWidth, this.fieldLength),
+            new Defender(false, false, 'Defender', this.fieldWidth, this.fieldLength, 'left'),
+            new Defender(false, false, 'Defender', this.fieldWidth, this.fieldLength, 'right'),
+            new Midfielder(false, false, 'Midfielder', this.fieldWidth, this.fieldLength),
+            new Forward(false, false, 'Forward', this.fieldWidth, this.fieldLength, 'left'),
+            new Forward(false, false, 'Forward', this.fieldWidth, this.fieldLength, 'center'),
+            new Forward(false, false, 'Forward', this.fieldWidth, this.fieldLength, 'right')
         ];
 
         this.players = [...userTeam, ...opposingTeam];
     }
 
-    renderPlayers(soccerField) {
-        // Render logic for players
+    // Method to update the attack end for each player
+    updateAttackEnd(userAttackDirection) {
+        this.players.forEach(player => {
+            if (player.isOnUserTeam) {
+                player.attackEnd = userAttackDirection;
+            } else {
+                player.attackEnd = userAttackDirection === 'length' ? 'zero' : 'length';
+            }
+        });
+    }
+
+    // Method to place goalies on the field
+    placeGoalies(ballX, ballY) {
+        this.players.forEach(player => {
+            console.log(`Player ID: ${player.getUniqueId()}, Role: ${player.role}, Is User: ${player.isUser}`);
+            if (player.role === 'Goalie' && !player.isUser) {
+                const idealPosition = player.calculateIdealPosition(ballX, ballY);
+                const variedX = clamp(idealPosition.x + generateNormalRandom(0, 2), 0, 100);
+                const variedY = clamp(idealPosition.y + generateNormalRandom(0, 2), 0, 100);
+                
+                player.setPosition(variedX, variedY);
+            }
+        });
+    }
+
+    // Method to render non-user players on the field
+    renderNonUserPlayers(soccerField) {
+        this.players.forEach(player => {
+            if (!player.isUser) {
+                // Ensure the player's position is set before rendering
+                if (player.x !== null && player.y !== null) {
+                    player.render(soccerField);
+                } else {
+                    console.error(`Player ${player.getUniqueId()} position is not set.`);
+                }
+            }
+        });
     }
 }
 

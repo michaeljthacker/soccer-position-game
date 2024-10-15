@@ -11,11 +11,11 @@ export class Defender extends Player {
     // Method to calculate the ideal position for the defender
     calculateIdealPosition(ballX, ballY, teammates, opponents) {
         // Get attacking and defending goal positions from the Player class methods
-        const defendingGoalY = this.getDefendingGoalY();
-        const defendingGoalX = 25;  // The X-coordinate of the defending goal (assumed to be 0 for simplicity)
+        const defendingGoalX = this.getDefendingGoalX();
+        const defendingGoalY = 25;  // The X-coordinate of the defending goal (assumed to be 0 for simplicity)
 
         // Step 1: Calculate the defender's Y position - closer to the defending goal than the ball
-        let tempY = 0.6 * defendingGoalY + 0.4 * ballY;
+        let tempY = 0.6 * defendingGoalX + 0.4 * ballY;
 
         // Step 2: Calculate the defender's X position - restricted to their side (left or right)
         let relativeX;
@@ -32,14 +32,14 @@ export class Defender extends Player {
         // Step 3: Ensure the defender is closer to the defending goal than the nearest opponent is to the goal
         opponents.forEach(opponent => {
             // Calculate distances to the defending goal (use getDistance)
-            const defenderDistanceToGoalLine = getDistance(tempX, tempY, defendingGoalX, defendingGoalY);
-            const opponentDistanceToGoalLine = getDistance(opponent.x, opponent.y, defendingGoalX, defendingGoalY);
+            const defenderDistanceToGoalLine = getDistance(tempX, tempY, defendingGoalY, defendingGoalX);
+            const opponentDistanceToGoalLine = getDistance(opponent.x, opponent.y, defendingGoalY, defendingGoalX);
             
             // If the opponent is closer to the goal, move the defender closer than the opponent
             if (opponentDistanceToGoalLine < defenderDistanceToGoalLine) {
-                const angle = Math.atan2(defendingGoalY - tempY, defendingGoalX - tempX);
-                tempX -= 0.2 * getDistance(tempX, tempY, defendingGoalX, defendingGoalY) * Math.cos(angle);  // Move 20% closer to the goal
-                tempY -= 0.2 * getDistance(tempX, tempY, defendingGoalX, defendingGoalY) * Math.sin(angle);  // Adjust both X and Y towards the goal
+                const angle = Math.atan2(defendingGoalX - tempY, defendingGoalY - tempX);
+                tempX -= 0.2 * getDistance(tempX, tempY, defendingGoalY, defendingGoalX) * Math.cos(angle);  // Move 20% closer to the goal
+                tempY -= 0.2 * getDistance(tempX, tempY, defendingGoalY, defendingGoalX) * Math.sin(angle);  // Adjust both X and Y towards the goal
             }
         });
 

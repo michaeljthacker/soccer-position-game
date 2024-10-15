@@ -134,7 +134,7 @@ This section outlines the key steps and the recommended order of operations for 
 - **Tasks**:
   - Generate random coordinates for the ball’s initial position within the bounds of the field.
 
-### 5. Place the Goalkeepers
+### 5. Place the Goalkeepers (Completed)
 - **Objective**: Place the goalkeepers for both teams based on their calculated ideal positions.
 - **Tasks**:
   - Position the goalkeepers based on the ball's position, ensuring they are on the line between the ball and the goal.
@@ -200,7 +200,8 @@ This section outlines the key steps and the recommended order of operations for 
 - Design / Fill of the ball (vs. plain white)
 - Description of the role / instructions before clicking "Start Game"
 - Give feedback on the correct location, *e.g.*, "Keep your spacing away from teammates!"
-
+- I think we can delete Player class properties related to field size
+- Customize player icons
 ---
 
 ### Notes:

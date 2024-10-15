@@ -10,10 +10,10 @@ export class Forward extends Player {
     // Method to calculate the ideal position for the forward
     calculateIdealPosition(ballX, ballY, teammates, opponents) {
         // Get attacking and defending goal positions from the Player class methods
-        const attackingGoalY = this.getAttackingGoalY();
+        const attackingGoalX = this.getAttackingGoalX();
 
         // Step 1: Calculate approximate tempY using the weighted average approach
-        let tempY = 0.6 * ballY + 0.4 * attackingGoalY;
+        let tempY = 0.6 * ballY + 0.4 * attackingGoalX;
 
         // Step 2: Calculate idealX with drift logic, allowing full drift to the ball if necessary
         let relativeX;
