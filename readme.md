@@ -142,7 +142,7 @@ This section outlines the key steps and the recommended order of operations for 
   - Ensure the player is in the bounds of the field.
   - Implement this to place all goalkeeper(s) that are not the user's chosen player.
 
-### 6. Place the Forwards
+### 6. Place the Forwards (Completed)
 - **Objective**: Position the forwards on both teams using the logic from the **Forward** class.
 - **Tasks**:
   - Position the forwards relative to the ball and their designated side (left, center, or right).
