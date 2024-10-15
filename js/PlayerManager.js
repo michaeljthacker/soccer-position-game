@@ -51,12 +51,24 @@ class PlayerManager {
     // Method to place goalies on the field
     placeGoalies(ballX, ballY) {
         this.players.forEach(player => {
-            console.log(`Player ID: ${player.getUniqueId()}, Role: ${player.role}, Is User: ${player.isUser}`);
             if (player.role === 'Goalie' && !player.isUser) {
                 const idealPosition = player.calculateIdealPosition(ballX, ballY);
                 const variedX = clamp(idealPosition.x + generateNormalRandom(0, 2), 0, 100);
                 const variedY = clamp(idealPosition.y + generateNormalRandom(0, 2), 0, 100);
-                
+                console.log(`Placing goalie ${ player.getUniqueId() } at (${ variedX }, ${ variedY })`);
+                player.setPosition(variedX, variedY);
+            }
+        });
+    }
+
+    // Method to place forwards on the field
+    placeForwards(ballX, ballY) {
+        this.players.forEach(player => {
+            if (player.role === 'Forward' && !player.isUser) {
+                const idealPosition = player.calculateIdealPosition(ballX, ballY, this.players);
+                const variedX = clamp(idealPosition.x + generateNormalRandom(0, 6), 0, 100);
+                const variedY = clamp(idealPosition.y + generateNormalRandom(0, 3), 0, 100);
+                console.log(`Placing forward ${ player.getUniqueId() } at (${ variedX }, ${ variedY })`);
                 player.setPosition(variedX, variedY);
             }
         });
