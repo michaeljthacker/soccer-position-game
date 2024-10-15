@@ -129,7 +129,7 @@ This section outlines the key steps and the recommended order of operations for 
   - Randomly choose between "zero" and "length" as the attack end.
   - Display an arrow and label indicating the direction of attack above the field and below the game title.
 
-### 4. Place the Ball
+### 4. Place the Ball (Completed)
 - **Objective**: Randomly place the ball on the field at the start of each turn.
 - **Tasks**:
   - Generate random coordinates for the ball’s initial position within the bounds of the field.
