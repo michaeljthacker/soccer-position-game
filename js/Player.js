@@ -19,13 +19,37 @@ export class Player {
         this.y = y;
     }
 
+    // Method to render the player on the field
+    render(svgElement) {
+        // Create a unique identifier for the player
+        const playerId = this.getUniqueId();
+
+        // Remove any existing player element
+        const existingPlayer = svgElement.querySelector(`#${playerId}`);
+        if (existingPlayer) {
+            existingPlayer.remove();
+        }
+
+        // Create a new player element
+        const playerElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        playerElement.setAttribute('id', playerId);
+        playerElement.setAttribute('class', `player player-${this.role}`);
+        playerElement.setAttribute('cx', `${this.x}%`); // Use percentage for x position
+        playerElement.setAttribute('cy', `${this.y}%`); // Use percentage for y position
+        playerElement.setAttribute('r', '1%'); // Use percentage for radius
+        playerElement.setAttribute('fill', this.isOnUserTeam ? '#63beff' : '#FFD700'); // Color based on team
+
+        // Append the player element to the SVG
+        svgElement.appendChild(playerElement);
+    }
+
     // Method to get the attacking goal position (Y coordinate) based on the attack end
-    getAttackingGoalY() {
+    getAttackingGoalX() {
         return this.attackEnd === 'length' ? this.fieldLength : 0;
     }
 
     // Method to get the defending goal position (Y coordinate)
-    getDefendingGoalY() {
+    getDefendingGoalX() {
         return this.attackEnd === 'length' ? 0 : this.fieldLength;
     }
 
@@ -41,5 +65,16 @@ export class Player {
             }
         });
         return { x: currentX, y: currentY };
+    }
+
+    // Placeholder method to calculate the ideal position for the player (overwritten by subclasses)
+    calculateIdealPosition(ballX, ballY, goalX, goalY) {
+        // This should be overridden by subclasses
+        return { x: 50, y: 50 };
+    }
+
+    // Method to get a unique identifier for the player
+    getUniqueId() {
+        return `player-${this.role}-${this.isOnUserTeam ? 'user' : 'opponent'}`;
     }
 }

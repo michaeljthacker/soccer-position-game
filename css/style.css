@@ -1,17 +1,17 @@
 /* Green background for the soccer field */
 .field-background {
-    fill: #4CAF50; /* Green color for the field */
+    fill: #1c671e; /* Green color for the field */
 }
 
 /* White color for field lines */
 .field-line {
-    stroke: white;
+    stroke: #ffffff; /* Light gray */
     stroke-width: 2;
 }
 
 /* Blue color for goals */
 .goal {
-    fill: blue;
+    fill: #c0c0c0;
     stroke: white;
     stroke-width: 0.2;
 }
@@ -19,14 +19,14 @@
 /* Interactive grid cells */
 .grid-cell {
     fill: transparent;
-    stroke: white;
-    stroke-width: 0.5;
+    stroke: #c0c0c0;
+    stroke-width: 0.2;
     cursor: pointer;
 }
 
 /* Form styling for role selection */
 form {
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    background-color: #000000b3; /* Semi-transparent black background */
     border-radius: 10px;
     padding: 20px;
     width: 300px;
@@ -128,7 +128,6 @@ button:hover {
 }
 
 .player {
-    fill: red;
     stroke: black;
     stroke-width: 1;
 }
