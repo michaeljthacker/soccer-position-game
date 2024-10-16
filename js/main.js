@@ -58,6 +58,7 @@ function setupTurn(soccerField, fieldWidth, fieldLength, playerManager, initialU
     // Position and render non-user players
     playerManager.placeGoalies(ball.x, ball.y);
     playerManager.placeForwards(ball.x, ball.y);
+    playerManager.placeDefenders(ball.x, ball.y);
     playerManager.renderNonUserPlayers(soccerField);
 }
 
