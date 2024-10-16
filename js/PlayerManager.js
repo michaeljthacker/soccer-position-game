@@ -10,7 +10,8 @@ class PlayerManager {
         this.fieldWidth = fieldWidth;
         this.fieldLength = fieldLength;
         this.userRole = userRole;
-        this.players = [];
+        this.players = []; // Array to hold all player objects
+        this.userPlayer = null; // Reference to the user-player object
     }
 
     initializePlayers() {
@@ -35,6 +36,13 @@ class PlayerManager {
         ];
 
         this.players = [...userTeam, ...opposingTeam];
+
+        // Identify and store the user-player object
+        this.players.forEach(player => {
+            if (player.isUser) {
+                this.userPlayer = player;
+            }
+        });
     }
 
     // Method to update the attack end for each player
@@ -112,6 +120,28 @@ class PlayerManager {
                 }
             }
         });
+    }
+
+    updateUserPosition(x, y) {
+        if (this.userPlayer) {
+            this.userPlayer.setPosition(x, y);
+            this.renderUserPosition();
+        } else {
+            console.error('User player not found.');
+        }
+    }
+
+    renderUserPosition() {
+        if (this.userPlayer) {
+            const soccerField = document.getElementById('soccer-field');
+            this.userPlayer.render(soccerField);
+        } else {
+            console.error('User player not found.');
+        }
+    }
+
+    scorePosition(idealPosition) {
+        // Code to compare this.userPlayer's position with idealPosition and calculate score
     }
 }
 

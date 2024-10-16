@@ -171,16 +171,30 @@ This section outlines the key steps and the recommended order of operations for 
 - **Tasks**:
   - Display a clickable grid for the user to select their position based on the current layout.
   - Provide visual feedback to show the user's selected position.
+  - Capture the coordinates of the clicked cell.
+  - Update the player's position based on the captured coordinates.
+  - Provide a "Submit Position" button to confirm the position.
+
+#### Implementation Details
+- **Field Class**: Responsible for rendering the clickable grid and handling click events.
+  - Method: `createGrid(clickHandler)`: Renders the grid and sets up click event listeners.
+  - Event Handling: Captures the coordinates of the clicked cell and calls the provided `clickHandler`.
+- **PlayerManager Class**: Responsible for updating the player's position and scoring.
+  - Method: `updatePlayerPosition(x, y)`: Updates the player's position based on the captured coordinates.
+  - Method: `renderUserPosition()`: Visually updates the user's position on the field using the `render()` method from the `Player` class.
+  - Method: `scorePosition(idealPosition)`: Compares the user's position to the ideal position and calculates a score.
 
 ### 10. Position Scoring
 - **Objective**: Score the user’s positioning for each turn based on how close they are to their calculated ideal position.
 - **Tasks**:
   - Compare the user’s chosen position to the ideal position (calculated based on the logic for their role).
   - Provide a score (e.g., 0-10) based on proximity and some measure of how critical positioning is (e.g., proximity to ball as a modifier of how precise positioning needs to be).
+  - Display the score to the user.
 
 ### 11. Repeat for First Half
 - **Objective**: Run multiple turns for the first half of the game.
 - **Tasks**:
+  - When moving to next turn, clear field and player positions.
   - Repeat steps 4 through 10 for each turn, simulating a sequence of plays in the first half.
   - Track cumulative scores.
 
@@ -195,6 +209,15 @@ This section outlines the key steps and the recommended order of operations for 
 - **Tasks**:
   - Show the final score and display celebratory animations based on the user’s total score.
   - Provide a “Restart Game” button to allow the user to play again.
+
+### Event Handling and Turn Management
+- **Event Handling**:
+  - The `Field` class handles click events on the grid and captures the coordinates of the clicked cell.
+  - The `PlayerManager` class updates the player's position based on the captured coordinates and scores the position.
+- **Turn Management**:
+  - Each turn involves capturing the user's position, scoring it, and moving to the next turn.
+  - A "Next Turn" button can be provided to allow the user to proceed to the next turn.
+  - The game runs multiple turns for the first half, switches sides for the second half, and ends with a final score display.
 
 ## Backlog & Potential Features
 - Design / Fill of the ball (vs. plain white)
