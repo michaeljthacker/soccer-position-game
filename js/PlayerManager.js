@@ -3,7 +3,7 @@ import { Goalie } from './Goalie.js';
 import { Defender } from './Defender.js';
 import { Midfielder } from './Midfielder.js';
 import { Forward } from './Forward.js';
-import { generateNormalRandom, clamp } from './utilities.js';
+import { getDistance, generateNormalRandom, clamp } from './utilities.js';
 
 class PlayerManager {
     constructor(fieldWidth, fieldLength, userRole) {
@@ -12,6 +12,7 @@ class PlayerManager {
         this.userRole = userRole;
         this.players = []; // Array to hold all player objects
         this.userPlayer = null; // Reference to the user-player object
+        this.ball = null; // Reference to the ball object
     }
 
     initializePlayers() {
@@ -57,52 +58,48 @@ class PlayerManager {
     }
 
     // Method to place goalies on the field
-    placeGoalies(ballX, ballY) {
+    placeGoalies() {
         this.players.forEach(player => {
             if (player.role === 'Goalie' && !player.isUser) {
-                const idealPosition = player.calculateIdealPosition(ballX, ballY);
+                const idealPosition = player.calculateIdealPosition(this.ball.x, this.ball.y);
                 const variedX = clamp(idealPosition.x + generateNormalRandom(0, 2), 0, 100);
                 const variedY = clamp(idealPosition.y + generateNormalRandom(0, 2), 0, 100);
-                console.log(`Placing goalie ${ player.getUniqueId() } at (${ variedX }, ${ variedY })`);
                 player.setPosition(variedX, variedY);
             }
         });
     }
 
     // Method to place forwards on the field
-    placeForwards(ballX, ballY) {
+    placeForwards() {
         this.players.forEach(player => {
             if (player.role === 'Forward' && !player.isUser) {
-                const idealPosition = player.calculateIdealPosition(ballX, ballY, this.players);
+                const idealPosition = player.calculateIdealPosition(this.ball.x, this.ball.y, this.players);
                 const variedX = clamp(idealPosition.x + generateNormalRandom(0, 6), 0, 100);
                 const variedY = clamp(idealPosition.y + generateNormalRandom(0, 3), 0, 100);
-                console.log(`Placing forward ${ player.getUniqueId() } at (${ variedX }, ${ variedY })`);
                 player.setPosition(variedX, variedY);
             }
         });
     }
 
     // Method to place defenders on the field
-    placeDefenders(ballX, ballY) {
+    placeDefenders() {
         this.players.forEach(player => {
             if (player.role === 'Defender' && !player.isUser) {
-                const idealPosition = player.calculateIdealPosition(ballX, ballY, this.players);
+                const idealPosition = player.calculateIdealPosition(this.ball.x, this.ball.y, this.players);
                 const variedX = clamp(idealPosition.x + generateNormalRandom(0, 6), 0, 100);
                 const variedY = clamp(idealPosition.y + generateNormalRandom(0, 3), 0, 100);
-                console.log(`Placing defender ${ player.getUniqueId() } at (${ variedX }, ${ variedY })`);
                 player.setPosition(variedX, variedY);
             }
         });
     }
 
     // Method to place midfielders on the field
-    placeMidfielders(ballX, ballY) {
+    placeMidfielders() {
         this.players.forEach(player => {
             if (player.role === 'Midfielder' && !player.isUser) {
-                const idealPosition = player.calculateIdealPosition(ballX, ballY, this.players);
+                const idealPosition = player.calculateIdealPosition(this.ball.x, this.ball.y, this.players);
                 const variedX = clamp(idealPosition.x + generateNormalRandom(0, 6), 0, 100);
                 const variedY = clamp(idealPosition.y + generateNormalRandom(0, 3), 0, 100);
-                console.log(`Placing midfielder ${ player.getUniqueId() } at (${ variedX }, ${ variedY })`);
                 player.setPosition(variedX, variedY);
             }
         });
@@ -124,7 +121,9 @@ class PlayerManager {
 
     updateUserPosition(x, y) {
         if (this.userPlayer) {
-            this.userPlayer.setPosition(x, y);
+            const newX = clamp(100 * (x + 0.5) / this.fieldLength, 0, 100);
+            const newY = clamp(100 * (y + 0.5) / this.fieldWidth, 0, 100);
+            this.userPlayer.setPosition(newX, newY);
             this.renderUserPosition();
         } else {
             console.error('User player not found.');
@@ -140,8 +139,55 @@ class PlayerManager {
         }
     }
 
-    scorePosition(idealPosition) {
-        // Code to compare this.userPlayer's position with idealPosition and calculate score
+    scorePosition() {
+        if (!this.userPlayer) {
+            console.error('User player not found.');
+            return;
+        }
+
+        // Calculate the distance between the user player, ideal, and the ball
+        let idealPosition;
+        if ((this.userPlayer.role === 'Defender') || (this.userPlayer.role === 'Midfielder') || (this.userPlayer.role === 'Forward')) {
+            idealPosition = this.userPlayer.calculateIdealPosition(this.ball.x, this.ball.y, this.players);
+        } else {
+            idealPosition = this.userPlayer.calculateIdealPosition(this.ball.x, this.ball.y);
+        }
+
+        const idealToUserDistance = getDistance(this.userPlayer.x, this.userPlayer.y, idealPosition.x, idealPosition.y);
+        const idealToBallDistance = getDistance(this.ball.x, this.ball.y, idealPosition.x, idealPosition.y);
+
+        const score = Math.max(0, Math.ceil(10 - (idealToUserDistance / Math.min(10, Math.max(1, idealToBallDistance)))));
+
+        this.displayScore(score);
+    }
+
+    displayScore(score) {
+        const scoreElement = document.getElementById('score');
+        if (scoreElement) {
+            scoreElement.textContent = `Score: ${score} / 10`;
+            scoreElement.style.display = 'block';
+            scoreElement.classList.add('score-banner'); // Add banner class for styling
+        } else {
+            console.error('Score element not found.');
+        }
+
+        const submitPositionButton = document.getElementById('submit-position');
+        if (submitPositionButton) {
+            submitPositionButton.style.display = 'none';
+        } else {
+            console.error('Submit position button not found.');
+        }
+
+        const nextTurnButton = document.getElementById('next-turn');
+        if (nextTurnButton) {
+            nextTurnButton.style.display = 'block';
+        } else {
+            console.error('Next turn button not found.');
+        }
+    }
+
+    updateBall(ball) {
+        this.ball = ball;
     }
 }
 

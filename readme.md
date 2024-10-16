@@ -166,7 +166,7 @@ This section outlines the key steps and the recommended order of operations for 
   - Ensure the player is in the bounds of the field.
   - Implement this to place all Forwards that are not the user's chosen player.
 
-### 9. User Interaction: Position Themselves
+### 9. User Interaction: Position Themselves (Completed)
 - **Objective**: Allow the user to position their player on the field.
 - **Tasks**:
   - Display a clickable grid for the user to select their position based on the current layout.
@@ -175,14 +175,13 @@ This section outlines the key steps and the recommended order of operations for 
   - Update the player's position based on the captured coordinates.
   - Provide a "Submit Position" button to confirm the position.
 
-#### Implementation Details
+#### Implementation Details (Completed)
 - **Field Class**: Responsible for rendering the clickable grid and handling click events.
   - Method: `createGrid(clickHandler)`: Renders the grid and sets up click event listeners.
   - Event Handling: Captures the coordinates of the clicked cell and calls the provided `clickHandler`.
 - **PlayerManager Class**: Responsible for updating the player's position and scoring.
   - Method: `updatePlayerPosition(x, y)`: Updates the player's position based on the captured coordinates.
   - Method: `renderUserPosition()`: Visually updates the user's position on the field using the `render()` method from the `Player` class.
-  - Method: `scorePosition(idealPosition)`: Compares the user's position to the ideal position and calculates a score.
 
 ### 10. Position Scoring
 - **Objective**: Score the user’s positioning for each turn based on how close they are to their calculated ideal position.
@@ -190,6 +189,10 @@ This section outlines the key steps and the recommended order of operations for 
   - Compare the user’s chosen position to the ideal position (calculated based on the logic for their role).
   - Provide a score (e.g., 0-10) based on proximity and some measure of how critical positioning is (e.g., proximity to ball as a modifier of how precise positioning needs to be).
   - Display the score to the user.
+
+#### Implementation Details
+  - **PlayerManager Class**: 
+  - Method: `scorePosition(idealPosition)`: Compares the user's position to the ideal position and calculates a score.
 
 ### 11. Repeat for First Half
 - **Objective**: Run multiple turns for the first half of the game.
