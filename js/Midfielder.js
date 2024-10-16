@@ -39,7 +39,6 @@ export class Midfielder extends Player {
             tempX = (100 - defenderX + forwardX) / 2;
             tempX = Math.max(tempX, ballX + 5);  // Midfielder stays behind the ball on the attacking side
         }
-        console.log(`Midfielder tempX: ${tempX}`);
 
         // Step 3: Calculate the midfielder's Y position - centered but drifting towards the ball
         const maxDrift = 0.6;
@@ -53,7 +52,7 @@ export class Midfielder extends Player {
         
         // Step 5: Adjust for spacing relative to teammates (ignore opponents for simplicity here)
         const idealPosition = this.adjustPositionForSpacing(tempX, tempY, teammates, 10);  // Keep 10 units away from teammates
-        console.log(`Midfielder ideal position: (${idealPosition.x}, ${idealPosition.y})`);
+        
         return { x: idealPosition.x, y: idealPosition.y };
     }
 }

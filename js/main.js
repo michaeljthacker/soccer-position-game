@@ -5,6 +5,7 @@ import { Ball } from './Ball.js';
 
 let userAttackDirection; // Public constant for attack direction
 let currentTurn = 1; // Initial turn
+let playerManager; // Player manager object
 
 // Function to handle role selection and start the game
 document.getElementById('role-selection-form').addEventListener('submit', function(event) {
@@ -31,20 +32,27 @@ function setupGame(userRole) {
     field.createField();
     field.createGoal(0, (fieldWidth - 10) / 2, 1, 10); // Corrected goal position
     field.createGoal(fieldLength - 1, (fieldWidth - 10) / 2, 1, 10); // Corrected goal position
-    field.createGrid((x, y) => console.log(`Cell clicked at (${x}, ${y})`));
+
+    playerManager = new PlayerManager(fieldWidth, fieldLength, userRole);
+    playerManager.initializePlayers();
+
+    field.createGrid((x, y) => {
+        playerManager.updateUserPosition(x, y);
+        document.getElementById('submit-position').style.display = 'block';
+    });
 
     // Determine the attack direction once at the beginning of the game
     const initialUserAttackDirection = Math.random() < 0.5 ? 'zero' : 'length';
 
-    // Initialize the player manager and players
-    const playerManager = new PlayerManager(fieldWidth, fieldLength, userRole);
-    playerManager.initializePlayers();
-
-    return { soccerField, fieldWidth, fieldLength, playerManager, initialUserAttackDirection };
+    return { soccerField, fieldWidth, fieldLength, initialUserAttackDirection };
 }
 
+document.getElementById('submit-position').addEventListener('click', () => {
+    playerManager.scorePosition();
+});
+
 // Function to setup each turn
-function setupTurn(soccerField, fieldWidth, fieldLength, playerManager, initialUserAttackDirection) {
+function setupTurn(soccerField, fieldWidth, fieldLength, initialUserAttackDirection) {
     // Display the user's attack direction
     userAttackDirection = updateUserAttackDirection(initialUserAttackDirection, currentTurn) // Update attack direction for user
     displayUserAttackDirection(userAttackDirection); // Display attack direction for user
@@ -54,19 +62,20 @@ function setupTurn(soccerField, fieldWidth, fieldLength, playerManager, initialU
     const ball = new Ball(fieldWidth, fieldLength);
     ball.placeRandomly();
     ball.render(soccerField);
+    playerManager.updateBall(ball);
 
     // Position and render non-user players
-    playerManager.placeGoalies(ball.x, ball.y);
-    playerManager.placeForwards(ball.x, ball.y);
-    playerManager.placeDefenders(ball.x, ball.y);
-    playerManager.placeMidfielders(ball.x, ball.y);
+    playerManager.placeGoalies();
+    playerManager.placeForwards();
+    playerManager.placeDefenders();
+    playerManager.placeMidfielders();
     playerManager.renderNonUserPlayers(soccerField);
 }
 
 // Main function to start the game
 function startGame(userRole) {
-    const { soccerField, fieldWidth, fieldLength, playerManager, initialUserAttackDirection } = setupGame(userRole);
-    setupTurn(soccerField, fieldWidth, fieldLength, playerManager, initialUserAttackDirection);
+    const { soccerField, fieldWidth, fieldLength, initialUserAttackDirection } = setupGame(userRole);
+    setupTurn(soccerField, fieldWidth, fieldLength, initialUserAttackDirection);
 }
 
 // Function to display the user's attack direction

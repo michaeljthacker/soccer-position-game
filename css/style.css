@@ -131,3 +131,18 @@ button:hover {
     stroke: black;
     stroke-width: 1;
 }
+
+/* Score banner styling */
+#score.score-banner {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: yellow;
+    color: black;
+    font-size: 24px;
+    padding: 10px;
+    border: 2px solid black;
+    z-index: 1000; /* Ensure it appears in front of other elements */
+    display: block;
+}
