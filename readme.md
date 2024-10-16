@@ -207,7 +207,7 @@ This section outlines the key steps and the recommended order of operations for 
   - Reverse the attacking direction and update the team’s roles accordingly.
   - Repeat steps 4 through 10 for the second half.
 
-### 13. End Game
+### 13. End Game (Completed)
 - **Objective**: Display the total score and trigger an end-of-game celebration.
 - **Tasks**:
   - Show the final score and display celebratory animations based on the user’s total score.
