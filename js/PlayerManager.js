@@ -13,6 +13,7 @@ class PlayerManager {
         this.players = []; // Array to hold all player objects
         this.userPlayer = null; // Reference to the user-player object
         this.ball = null; // Reference to the ball object
+        this.scores = []; // Array to hold scores for each turn
     }
 
     initializePlayers() {
@@ -156,9 +157,10 @@ class PlayerManager {
         const idealToUserDistance = getDistance(this.userPlayer.x, this.userPlayer.y, idealPosition.x, idealPosition.y);
         const idealToBallDistance = getDistance(this.ball.x, this.ball.y, idealPosition.x, idealPosition.y);
 
-        const score = Math.max(0, Math.ceil(10 - (idealToUserDistance / Math.min(10, Math.max(1, idealToBallDistance)))));
+        const score = Math.max(0, Math.ceil(10 - (idealToUserDistance / Math.min(5, Math.max(1, idealToBallDistance)))));
 
         this.displayScore(score);
+        this.saveTurnScore(score); // Save the score for the turn
     }
 
     displayScore(score) {
@@ -170,24 +172,25 @@ class PlayerManager {
         } else {
             console.error('Score element not found.');
         }
+    }
 
-        const submitPositionButton = document.getElementById('submit-position');
-        if (submitPositionButton) {
-            submitPositionButton.style.display = 'none';
-        } else {
-            console.error('Submit position button not found.');
-        }
+    saveTurnScore(score) {
+        this.scores.push(score);
+    }
 
-        const nextTurnButton = document.getElementById('next-turn');
-        if (nextTurnButton) {
-            nextTurnButton.style.display = 'block';
-        } else {
-            console.error('Next turn button not found.');
-        }
+    getTotalScore() {
+        return this.scores.reduce((total, score) => total + score, 0);
     }
 
     updateBall(ball) {
         this.ball = ball;
+    }
+
+    // Reset all player positions
+    resetPlayerPositions() {
+        this.players.forEach(player => {
+            player.resetPosition();
+        });
     }
 }
 

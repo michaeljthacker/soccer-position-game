@@ -77,4 +77,10 @@ export class Player {
     getUniqueId() {
         return `player-${this.role}-${this.isOnUserTeam ? 'user' : 'opponent'}`;
     }
+
+    // Reset the player's position
+    resetPosition() {
+        this.x = null;
+        this.y = null;
+    }
 }

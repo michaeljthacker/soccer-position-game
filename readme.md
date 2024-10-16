@@ -194,20 +194,20 @@ This section outlines the key steps and the recommended order of operations for 
   - **PlayerManager Class**: 
   - Method: `scorePosition(idealPosition)`: Compares the user's position to the ideal position and calculates a score.
 
-### 11. Repeat for First Half
+### 11. Repeat for First Half (Completed)
 - **Objective**: Run multiple turns for the first half of the game.
 - **Tasks**:
   - When moving to next turn, clear field and player positions.
   - Repeat steps 4 through 10 for each turn, simulating a sequence of plays in the first half.
   - Track cumulative scores.
 
-### 12. Switch Sides for the Second Half
+### 12. Switch Sides for the Second Half (Completed)
 - **Objective**: Automatically switch the user's attacking side for the second half of the game.
 - **Tasks**:
   - Reverse the attacking direction and update the team’s roles accordingly.
   - Repeat steps 4 through 10 for the second half.
 
-### 13. End Game
+### 13. End Game (Completed)
 - **Objective**: Display the total score and trigger an end-of-game celebration.
 - **Tasks**:
   - Show the final score and display celebratory animations based on the user’s total score.
