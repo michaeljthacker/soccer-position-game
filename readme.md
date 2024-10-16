@@ -158,7 +158,7 @@ This section outlines the key steps and the recommended order of operations for 
   - Ensure the player is in the bounds of the field.
   - Implement this to place all Forwards that are not the user's chosen player.
 
-### 8. Place the Midfielders
+### 8. Place the Midfielders (Completed)
 - **Objective**: Position the midfielders for both teams using the logic from the **Midfielder** class.
 - **Tasks**:
   - Position the midfielders based on the defenders and forwards’ positions.

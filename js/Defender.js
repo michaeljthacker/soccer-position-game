@@ -32,9 +32,9 @@ export class Defender extends Player {
         // Step 2: Calculate the defender's X position - restricted to their side (left or right)
         let relativeY;
         if (this.side === 'left') {
-            relativeY = 20;  // Left side of the field
+            relativeY = 30;  // Left side of the field
         } else if (this.side === 'right') {
-            relativeY = 80;  // Right side of the field
+            relativeY = 70;  // Right side of the field
         }
         
         // Flip field if opposite attackEnd
@@ -62,7 +62,7 @@ export class Defender extends Player {
         });
 
         // Step 4: Adjust for spacing relative to teammates only (ignoring opponents)
-        const teammates = players.filter(player => player.isOnUserTeam === false)
+        const teammates = players.filter(player => player.isOnUserTeam === true)
         const idealPosition = this.adjustPositionForSpacing(tempX, tempY, teammates, 5);  // Only teammates
 
         return { x: idealPosition.x, y: idealPosition.y };
