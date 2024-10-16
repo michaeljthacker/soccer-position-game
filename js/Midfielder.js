@@ -8,47 +8,52 @@ export class Midfielder extends Player {
     }
 
     // Method to calculate the ideal position for the midfielder
-    calculateIdealPosition(ballX, ballY, teammates, opponents) {
+    calculateIdealPosition(ballX, ballY, players) {
         // Get attacking and defending goal positions from the Player class methods
-        const attackingGoalX = this.getAttackingGoalX();
-        const defendingGoalX = this.getDefendingGoalX();
-        const goalX = 25;  // The x-coordinate for both goals (center of the field width-wise)
+        const attackingGoalX = 100 * this.getAttackingGoalX() / this.fieldLength;
+        const defendingGoalX = 100 * this.getDefendingGoalX() / this.fieldLength;
+        const goalY = 50;  // The y-coordinate for both goals (center of the field width-wise)
 
-        // Step 1: Calculate the defender's Y closest to the defending goal
-        const defenderY = Math.min(...teammates
+        // Separate teammates and opponents for positioning calculations
+        const teammates = players.filter(player => player.isOnUserTeam === true);
+        const opponents = players.filter(player => player.isOnUserTeam === false);
+
+        // Step 1: Calculate the defender's X closest to the defending goal
+        const defenderX = Math.min(...teammates
             .filter(player => player.role === 'Defender')
-            .map(player => getDistance(player.x, player.y, goalX, defendingGoalX)));  // Find closest defender to defending goal
+            .map(player => getDistance(player.x, player.y, defendingGoalX, player.y)));  // Find closest defender to defending goal
 
-        // Step 2: Calculate the forward's Y closest to the attacking goal
-        const forwardY = Math.min(...teammates
+        // Step 2: Calculate the forward's X closest to the attacking goal
+        const forwardX = Math.min(...teammates
             .filter(player => player.role === 'Forward')
-            .map(player => getDistance(player.x, player.y, goalX, attackingGoalX)));  // Find closest forward to attacking goal
+            .map(player => getDistance(player.x, player.y, attackingGoalX, player.y)));  // Find closest forward to attacking goal
 
-        // Calculate the average Y position between defenders and forwards
-        let tempY = (defenderY + forwardY) / 2;
-
-        // Ensure midfielder doesn't push too far ahead of the center forward based on attackEnd
+        // Calculate the average X position between defenders and forwards and ensure midfielder doesn't push too far ahead
+        let tempX;
         if (this.attackEnd === 'length') {
-            // Team is attacking the end at Y = fieldLength
-            tempY = Math.min(tempY, ballY - (0.1 * this.fieldLength));  // Midfielder stays behind the ball on the attacking side
+            // Team is attacking the end at X = fieldLength
+            tempX = (100 + defenderX - forwardX) / 2;
+            tempX = Math.min(tempX, ballX - 5);  // Midfielder stays behind the ball on the attacking side
         } else {
-            // Team is attacking the end at Y = 0
-            tempY = Math.max(tempY, ballY + (0.1 * this.fieldLength));  // Midfielder stays behind the ball on the attacking side
+            // Team is attacking the end at X = 0
+            tempX = (100 - defenderX + forwardX) / 2;
+            tempX = Math.max(tempX, ballX + 5);  // Midfielder stays behind the ball on the attacking side
         }
+        console.log(`Midfielder tempX: ${tempX}`);
 
-        // Step 3: Calculate the midfielder's X position - centered but drifting towards the ball
+        // Step 3: Calculate the midfielder's Y position - centered but drifting towards the ball
         const maxDrift = 0.6;
-        let tempX = this.fieldWidth * (0.5 * (1 - maxDrift) + (ballX / this.fieldWidth) * maxDrift);
+        let tempY = 50 * (1 - maxDrift) + ballY * maxDrift;
 
         // Step 4: Check if midfielder is within 10% of field length of the ball and go directly to the ball if so
-        if (getDistance(tempX, tempY, ballX, ballY) < 0.1 * this.fieldLength) {
+        if (getDistance(tempX, tempX, ballX, ballY) < 10) {
             tempX = ballX;
             tempY = ballY;
         }
-
+        
         // Step 5: Adjust for spacing relative to teammates (ignore opponents for simplicity here)
         const idealPosition = this.adjustPositionForSpacing(tempX, tempY, teammates, 10);  // Keep 10 units away from teammates
-
+        console.log(`Midfielder ideal position: (${idealPosition.x}, ${idealPosition.y})`);
         return { x: idealPosition.x, y: idealPosition.y };
     }
 }

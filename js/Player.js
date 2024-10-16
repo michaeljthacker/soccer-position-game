@@ -43,12 +43,12 @@ export class Player {
         svgElement.appendChild(playerElement);
     }
 
-    // Method to get the attacking goal position (Y coordinate) based on the attack end
+    // Method to get the attacking goal position (X coordinate) based on the attack end
     getAttackingGoalX() {
         return this.attackEnd === 'length' ? this.fieldLength : 0;
     }
 
-    // Method to get the defending goal position (Y coordinate)
+    // Method to get the defending goal position (X coordinate)
     getDefendingGoalX() {
         return this.attackEnd === 'length' ? 0 : this.fieldLength;
     }
@@ -60,8 +60,8 @@ export class Player {
             if (distance < minDistance) {
                 // Move away from other player based on current X and Y
                 const angle = Math.atan2(player.y - currentY, player.x - currentX);
-                currentX -= minDistance * Math.cos(angle);
-                currentY -= minDistance * Math.sin(angle);
+                currentX -= (distance - minDistance) * Math.cos(angle);
+                currentY -= (distance - minDistance) * Math.sin(angle);
             }
         });
         return { x: currentX, y: currentY };
