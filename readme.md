@@ -20,7 +20,7 @@ In this version of the game, players can now be assigned to either end of the fi
 
 - **Turn-based Gameplay**: The game is turn-based, with each turn starting with random ball placement, followed by the user's input to position their player.
 
-- **Feedback and Scoring**: After each turn, feedback is given on the user’s placement, comparing it to the optimal position for that role, with scoring based on proximity to the ideal location.
+- **Feedback and Scoring**: After the user selects their position, feedback is given on the user’s placement, comparing it to the optimal position for that role, with scoring based on proximity to the ideal location.
 
 ## Project Intent
 
@@ -67,7 +67,7 @@ After the user selects their position, the game evaluates the placement based on
 - **50% of the score** is based on whether the player is within the correct general area (zone).
 - **50% of the score** is based on how close the player’s position is to the ideal position within that area.
 
-The game provides feedback at the end of each turn, showing the correct placement and scoring the user based on their proximity to the optimal spot.
+The game provides feedback after the user submits their position, showing the correct placement and scoring the user based on their proximity to the optimal spot.
 
 ## Technologies Used
 
@@ -183,14 +183,14 @@ This section outlines the key steps and the recommended order of operations for 
   - Method: `updatePlayerPosition(x, y)`: Updates the player's position based on the captured coordinates.
   - Method: `renderUserPosition()`: Visually updates the user's position on the field using the `render()` method from the `Player` class.
 
-### 10. Position Scoring
+### 10. Position Scoring (Completed)
 - **Objective**: Score the user’s positioning for each turn based on how close they are to their calculated ideal position.
 - **Tasks**:
   - Compare the user’s chosen position to the ideal position (calculated based on the logic for their role).
   - Provide a score (e.g., 0-10) based on proximity and some measure of how critical positioning is (e.g., proximity to ball as a modifier of how precise positioning needs to be).
   - Display the score to the user.
 
-#### Implementation Details
+#### Implementation Details (Completed)
   - **PlayerManager Class**: 
   - Method: `scorePosition(idealPosition)`: Compares the user's position to the ideal position and calculates a score.
 
