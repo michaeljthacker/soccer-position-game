@@ -150,7 +150,7 @@ This section outlines the key steps and the recommended order of operations for 
   - Ensure the player is in the bounds of the field.
   - Implement this to place all Forwards that are not the user's chosen player.
 
-### 7. Place the Defenders
+### 7. Place the Defenders (Completed)
 - **Objective**: Position the defenders on both teams using the logic from the **Defender** class.
 - **Tasks**:
   - Place the defenders between the ball and the defending goal, ensuring that they are closer to the defending goal than the nearest opposing player.
