@@ -53,15 +53,17 @@ h1 {
     margin-top: 20px; /* Adjust the value as needed */
 }
 
-/* Center the field and make it responsive */
+/* Adjust the game screen to align with the game title */
 #game-screen {
-    flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; /*flex-start;*/ /* Align items to the start (top) */
+    justify-content: center;
     margin-top: 20px; /* Add some margin to separate from the header */
+    flex-direction: column; /* Ensure elements stack vertically */
 }
 
+/* Center the field and make it responsive */
 #soccer-field {
     width: 100%;
     height: auto;
@@ -69,6 +71,7 @@ h1 {
     max-height: 100%;
     aspect-ratio: 2 / 1; /* Maintain aspect ratio of 2:1 */
     border: 2px solid white; /* Add border to visualize the field */
+    margin-top: 20px; /* Add some margin to separate from the game screen */
 }
 
 /* General text styling */
@@ -80,8 +83,9 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align items to the start (top) */
     height: 100vh;
+    flex-direction: column; /* Ensure elements stack vertically */
 }
 
 /* Heading styling */
