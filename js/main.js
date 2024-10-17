@@ -55,17 +55,6 @@ function setupGame() {
     initialUserAttackDirection = Math.random() < 0.5 ? 'zero' : 'length';
 }
 
-document.getElementById('submit-position').addEventListener('click', () => {
-    playerManager.scorePosition();
-    isGridClickable = false; // Disable grid clicks after submitting position
-    hideSubmitPosition();
-    if (currentTurn === 10) {
-        showFinishGame();
-    } else {
-        showNextTurn();
-    }
-});
-
 // Function to setup each turn
 function setupTurn() {
     // Display the user's attack direction
@@ -103,6 +92,12 @@ function resetTurnElements() {
     const allPlayers = soccerField.querySelectorAll('.player');
     allPlayers.forEach(player => player.remove());
 
+    // Remove ideal player marker
+    const idealPositionMarker = soccerField.querySelector('.ideal-position-marker');
+    if (idealPositionMarker) {
+        idealPositionMarker.remove();
+    }
+
     // Reset player positions
     playerManager.resetPlayerPositions();
 }
@@ -118,8 +113,8 @@ function startNextTurn() {
     resetTurnElements();
     hideTurnUIElements();
     incrementTurn();
-    if (currentTurn > 10) {
-        document.getElementById('finish-game').classList.remove('d-none');
+    if (currentTurn === 6) {
+        showHalfTimePopup();
     } else {
         setupTurn();
     }
@@ -167,6 +162,18 @@ function incrementTurn() {
     currentTurn++;
 }
 
+// Add event listener for the "Submit Position" button
+document.getElementById('submit-position').addEventListener('click', () => {
+    playerManager.scorePosition();
+    isGridClickable = false; // Disable grid clicks after submitting position
+    hideSubmitPosition();
+    if (currentTurn === 10) {
+        showFinishGame();
+    } else {
+        showNextTurn();
+    }
+});
+
 // Add event listener for the "Next Turn" button
 document.getElementById('next-turn').addEventListener('click', startNextTurn);
 
@@ -196,6 +203,17 @@ function showNextTurn() {
     } else {
         console.error('Next turn button not found.');
     }
+}
+
+// Show Half Time Popup
+function showHalfTimePopup() {
+    const halfTimePopup = document.getElementById('half-time-popup');
+    halfTimePopup.classList.remove('d-none');
+
+    setTimeout(() => {
+        halfTimePopup.classList.add('d-none');
+        setupTurn();
+    }, 2000); // Hide the pop-up after 2 seconds
 }
 
 // Show Finish Game Button

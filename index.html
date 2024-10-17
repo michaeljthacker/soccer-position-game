@@ -19,7 +19,7 @@
         
         <!-- Start screen -->
         <div id="start-screen" class="text-center">
-            <p class="instructions">
+            <p class="game-instructions">
                 <strong>Instructions: </strong> Select a role. Then, for each turn, place your player in the right spot based on the ball and other players' positions on the field and based on your role.
             </p>
             <form id="role-selection-form">
@@ -44,7 +44,7 @@
         <div id="game-screen" class="d-none">
             <!-- Game details -->
             <div id="game-details" class="mb-3">
-                <p>Your team is blue. Opponents are yellow. You are a <strong><span id="selected-role"></span></strong>.</p>
+                <p>You are a <strong><span id="selected-role"></span></strong>. Your team is blue. Opponents are yellow. A red dot is our calculated ideal position.</p>
             </div>
             <!-- In-game Buttons at the Top -->
             <div id="game-buttons" class="text-center mb-3">
@@ -55,15 +55,21 @@
             </div>
             <!-- Soccer Field -->
             <svg id="soccer-field" width="100" height="50"></svg> <!-- Updated dimensions -->
+            <!-- Half-time Pop-up -->
+            <div id="half-time-popup" class="d-none">
+                <h1>HALF-TIME (switch sides)</h1>
+            </div>
         </div>
         <!-- Role Details section -->
         <div id="role-details" class="mt-4">
             <h2 class="text-center">Role Details</h2>
-            <div class="role-instructions">
-                <p><strong>Goalie:</strong> Stay between the goal and the ball, never too far upfield. Be ready to block any direct threat.</p>
-                <p><strong>Defender:</strong> Work with the goalie and fellow defender to protect the goal; maintain spacing and never let an opponent get behind you.</p>
-                <p><strong>Midfielder:</strong> Move up and down the field, staying central and balancing support for both defense and attack.</p>
-                <p><strong>Forward:</strong> Keep your spacing and be ready for a pass. If you're closest to the ball, go for it.</p>
+            <div class="role-instructions p-3">
+                <ul>
+                    <li><strong>Goalie:</strong> Stay between the goal and the ball, never too far upfield. Be ready to block any direct threat.</li>
+                    <li><strong>Defender:</strong> Work with the goalie and fellow defender to protect the goal; maintain spacing and never let an opponent get behind you.</li>
+                    <li><strong>Midfielder:</strong> Move up and down the field, staying central and balancing support for both defense and attack.</li>
+                    <li><strong>Forward:</strong> Keep your spacing and be ready for a pass. If you're closest to the ball, go for it.</li>
+                </ul>
             </div>
         </div>
     </div>
