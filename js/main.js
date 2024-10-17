@@ -103,6 +103,12 @@ function resetTurnElements() {
     const allPlayers = soccerField.querySelectorAll('.player');
     allPlayers.forEach(player => player.remove());
 
+    // Remove ideal player marker
+    const idealPositionMarker = soccerField.querySelector('.ideal-position-marker');
+    if (idealPositionMarker) {
+        idealPositionMarker.remove();
+    }
+
     // Reset player positions
     playerManager.resetPlayerPositions();
 }

@@ -139,6 +139,39 @@ class PlayerManager {
             console.error('User player not found.');
         }
     }
+    
+    renderIdealPositionMarker() {
+        const soccerField = document.getElementById('soccer-field');
+        if (!soccerField) {
+            console.error('Soccer field element not found.');
+            return;
+        }
+
+        // Remove any existing ideal position marker
+        const existingMarker = soccerField.querySelector('.ideal-position-marker');
+        if (existingMarker) {
+            existingMarker.remove();
+        }
+
+        // Get the ideal position for the user player
+        let idealPosition;
+        if ((this.userPlayer.role === 'Defender') || (this.userPlayer.role === 'Midfielder') || (this.userPlayer.role === 'Forward')) {
+            idealPosition = this.userPlayer.calculateIdealPosition(this.ball.x, this.ball.y, this.players);
+        } else {
+            idealPosition = this.userPlayer.calculateIdealPosition(this.ball.x, this.ball.y);
+        }
+
+        // Create a new marker element
+        const marker = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        marker.setAttribute('cx', `${idealPosition.x}%`);
+        marker.setAttribute('cy', `${idealPosition.y}%`);
+        marker.setAttribute('r', '1%'); // Radius of the marker
+        marker.setAttribute('fill', '#FF0000'); // Color of the marker
+        marker.classList.add('ideal-position-marker');
+
+        // Append the marker to the soccer field
+        soccerField.appendChild(marker);
+    }
 
     scorePosition() {
         if (!this.userPlayer) {
@@ -161,6 +194,9 @@ class PlayerManager {
 
         this.displayScore(score);
         this.saveTurnScore(score); // Save the score for the turn
+
+        // Render the ideal position marker
+        this.renderIdealPositionMarker()
     }
 
     displayScore(score) {
