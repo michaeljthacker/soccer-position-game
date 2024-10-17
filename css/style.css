@@ -159,3 +159,15 @@ button:hover {
     display: flex;
     flex-direction: column;
 }
+
+.game-instructions {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.role-instructions {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid #c0c0c0;
+}
