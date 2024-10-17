@@ -38,6 +38,7 @@ body, html {
     height: 100%;
     margin: 0;
     display: flex;
+    padding: 0;
     flex-direction: column;
 }
 
@@ -72,6 +73,7 @@ h1 {
     aspect-ratio: 2 / 1; /* Maintain aspect ratio of 2:1 */
     border: 2px solid white; /* Add border to visualize the field */
     margin-top: 20px; /* Add some margin to separate from the game screen */
+    flex-shrink: 0;
 }
 
 /* General text styling */
@@ -149,4 +151,11 @@ button:hover {
     border: 2px solid black;
     z-index: 1000; /* Ensure it appears in front of other elements */
     display: block;
+}
+
+#game-container {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }

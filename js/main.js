@@ -22,6 +22,7 @@ document.getElementById('role-selection-form').addEventListener('submit', functi
     if (selectedUserRole) {
         document.getElementById('start-screen').classList.add('d-none');
         document.getElementById('game-screen').classList.remove('d-none');
+        document.getElementById('selected-role').innerText = selectedUserRole;
         startGame();
     } else {
         alert('Please select a role.');

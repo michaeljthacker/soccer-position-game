@@ -13,13 +13,15 @@
 </head>
 <body>
     <!-- Main container for the game interface -->
-    <div class="container-fluid">
+    <div id="game-container" class="container-fluid">
         <!-- Game title -->
         <h1 id="game-title" class="text-center mb-4">Soccer Positioning Game</h1>
         
         <!-- Start screen -->
         <div id="start-screen" class="text-center">
-            <h2 class="mb-3">Select Your Role</h2>
+            <p class="instructions">
+                <b>Instructions: </b> Select a role. Then, for each turn, place your player in the right spot based on the ball and other players' positions on the field and based on your role.
+            </p>
             <form id="role-selection-form">
                 <div class="mb-3">
                     <label for="role" class="form-label">Choose a role:</label>
@@ -40,6 +42,10 @@
 
         <!-- Game screen (initially hidden) -->
         <div id="game-screen" class="d-none">
+            <!-- Game details -->
+            <div id="game-details" class="mb-3">
+                <p>Your team is blue. Opponents are yellow. You are a </b><span id="selected-role"></span>.</p>
+            </div>
             <!-- In-game Buttons at the Top -->
             <div id="game-buttons" class="text-center mb-3">
                 <button id="submit-position" class="d-none">Submit Position</button>
