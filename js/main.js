@@ -22,7 +22,6 @@ document.getElementById('role-selection-form').addEventListener('submit', functi
     if (selectedUserRole) {
         document.getElementById('start-screen').classList.add('d-none');
         document.getElementById('game-screen').classList.remove('d-none');
-        document.getElementById('attack-direction').classList.remove('d-none'); // Show attack direction
         startGame();
     } else {
         alert('Please select a role.');
@@ -111,6 +110,7 @@ function resetTurnElements() {
 function startGame() {
     setupGame();
     setupTurn();
+    document.getElementById('game-title').innerHTML = 'Soccer Positioning Game'; // Set initial title
 }
 
 // Function to clean up previous turn
@@ -128,7 +128,6 @@ function startNextTurn() {
 // Function to finish the game
 function finishGame() {
     document.getElementById('game-screen').style.display = 'none';
-    document.getElementById('attack-direction').style.display = 'none';
     document.getElementById('finish-game').style.display = 'none';
     document.getElementById('score').style.display = 'none';
     const totalScore = playerManager.getTotalScore();
@@ -136,15 +135,16 @@ function finishGame() {
     scoreElement.innerHTML = `Total score: ${totalScore} of 100!`;
     scoreElement.style.display = 'block';
     document.getElementById('new-game').style.display = 'block';
+    document.getElementById('game-title').innerHTML = 'Soccer Positioning Game'; // Reset title
 }
 
 // Function to display the user's attack direction
 function displayUserAttackDirection(attackEnd) {
-    const attackDirection = document.getElementById('attack-direction');
+    const gameTitle = document.getElementById('game-title');
     if (attackEnd === 'length') {
-        attackDirection.innerHTML = 'ATTACK →';
+        gameTitle.innerHTML = 'ATTACK →';
     } else {
-        attackDirection.innerHTML = '← ATTACK';
+        gameTitle.innerHTML = '← ATTACK';
     }
 }
 
