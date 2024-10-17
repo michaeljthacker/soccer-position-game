@@ -22,7 +22,7 @@ document.getElementById('role-selection-form').addEventListener('submit', functi
     if (selectedUserRole) {
         document.getElementById('start-screen').classList.add('d-none');
         document.getElementById('game-screen').classList.remove('d-none');
-        document.getElementById('attack-direction').classList.remove('d-none'); // Show attack direction
+        document.getElementById('selected-role').innerText = selectedUserRole;
         startGame();
     } else {
         alert('Please select a role.');
@@ -47,7 +47,7 @@ function setupGame() {
     field.createGrid((x, y) => {
         if (isGridClickable) {
             playerManager.updateUserPosition(x, y);
-            document.getElementById('submit-position').style.display = 'block';
+            document.getElementById('submit-position').classList.remove('d-none');
         }
     });
 
@@ -119,7 +119,7 @@ function startNextTurn() {
     hideTurnUIElements();
     incrementTurn();
     if (currentTurn > 10) {
-        document.getElementById('finish-game').style.display = 'block';
+        document.getElementById('finish-game').classList.remove('d-none');
     } else {
         setupTurn();
     }
@@ -127,24 +127,23 @@ function startNextTurn() {
 
 // Function to finish the game
 function finishGame() {
-    document.getElementById('game-screen').style.display = 'none';
-    document.getElementById('attack-direction').style.display = 'none';
-    document.getElementById('finish-game').style.display = 'none';
-    document.getElementById('score').style.display = 'none';
+    document.getElementById('soccer-field').classList.add('d-none');
+    document.getElementById('submit-position').classList.add('d-none');
+    document.getElementById('next-turn').classList.add('d-none');
+    document.getElementById('finish-game').classList.add('d-none');
     const totalScore = playerManager.getTotalScore();
-    const scoreElement = document.getElementById('final-score');
-    scoreElement.innerHTML = `Total score: ${totalScore} of 100!`;
-    scoreElement.style.display = 'block';
-    document.getElementById('new-game').style.display = 'block';
+    const gameTitleElement = document.getElementById('game-title');
+    gameTitleElement.innerHTML = `Total score: ${totalScore} of 100!`;
+    document.getElementById('new-game').classList.remove('d-none');
 }
 
 // Function to display the user's attack direction
 function displayUserAttackDirection(attackEnd) {
-    const attackDirection = document.getElementById('attack-direction');
+    const gameTitle = document.getElementById('game-title');
     if (attackEnd === 'length') {
-        attackDirection.innerHTML = 'ATTACK →';
+        gameTitle.innerHTML = 'ATTACK →';
     } else {
-        attackDirection.innerHTML = '← ATTACK';
+        gameTitle.innerHTML = '← ATTACK';
     }
 }
 
@@ -159,9 +158,8 @@ function updateUserAttackDirection() {
 
 // Function to hide the turn UI elements
 function hideTurnUIElements() {
-    document.getElementById('next-turn').style.display = 'none';
-    document.getElementById('submit-position').style.display = 'none';
-    document.getElementById('score').style.display = 'none';
+    document.getElementById('next-turn').classList.add('d-none');
+    document.getElementById('submit-position').classList.add('d-none');
 }
 
 // Function to increment next turn
@@ -184,7 +182,7 @@ document.getElementById('new-game').addEventListener('click', () => {
 function hideSubmitPosition() {
     const submitPositionButton = document.getElementById('submit-position');
     if (submitPositionButton) {
-        submitPositionButton.style.display = 'none';
+        submitPositionButton.classList.add('d-none');
     } else {
         console.error('Submit position button not found.');
     }
@@ -194,7 +192,7 @@ function hideSubmitPosition() {
 function showNextTurn() {
     const nextTurnButton = document.getElementById('next-turn');
     if (nextTurnButton) {
-        nextTurnButton.style.display = 'block';
+        nextTurnButton.classList.remove('d-none');
     } else {
         console.error('Next turn button not found.');
     }
@@ -204,7 +202,7 @@ function showNextTurn() {
 function showFinishGame() {
     const finishGameButton = document.getElementById('finish-game');
     if (finishGameButton) {
-        finishGameButton.style.display = 'block';
+        finishGameButton.classList.remove('d-none');
     } else {
         console.error('Finish game button not found.');
     }

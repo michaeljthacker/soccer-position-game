@@ -164,13 +164,11 @@ class PlayerManager {
     }
 
     displayScore(score) {
-        const scoreElement = document.getElementById('score');
-        if (scoreElement) {
-            scoreElement.textContent = `Score: ${score} / 10`;
-            scoreElement.style.display = 'block';
-            scoreElement.classList.add('score-banner'); // Add banner class for styling
+        const gameTitleElement = document.getElementById('game-title');
+        if (gameTitleElement) {
+            gameTitleElement.textContent = `Score: ${score} / 10`;
         } else {
-            console.error('Score element not found.');
+            console.error('Game title element not found.');
         }
     }
 
