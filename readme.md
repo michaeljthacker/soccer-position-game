@@ -66,16 +66,12 @@ readme.md
 
 ## Backlog & Potential Features
 - Design / Fill of the ball (vs. plain white)
-- Description of the role / instructions before clicking "Start Game"
 - Give feedback on the correct location, *e.g.*, "Keep your spacing away from teammates!"
 - I think we can delete Player class properties related to field size
 - Customize player icons
 - Refactor `calculateIdealPosition()` so every Player subclass takes the same inputs, then replace `placeGoalies()`, `placeForwards()`, etc. with a single reusable function.
-
-## Notes
-- **Responsive Design**: Ensure that the UI is responsive and user-friendly across devices. Progressively style `style.css` as you implement the different components.
-- **Testing**: Test each step in isolation to ensure functionality before moving on to the next.
-- **Adjust Logic as Needed**: Be prepared to tweak the positioning logic or user interactions based on feedback or testing results. Keep the architecture flexible.
+- Add testing to each function in isolation to ensure functionality of updates.
+- Get feedback and improve the positioning logic. This is very much MVP / limited.
 
 ## License
 This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
