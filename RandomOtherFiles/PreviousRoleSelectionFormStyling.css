@@ -1,0 +1,80 @@
+/* Green background for the soccer field */
+.field-background {
+    fill: #4CAF50; /* Green color for the field */
+}
+
+/* Blue color for goals */
+.goal {
+    fill: var(--bs-info); /* Use Bootstrap's info color for goals */
+    stroke: var(--bs-white);
+    stroke-width: 0.2;
+}
+
+/* Interactive grid cells */
+.grid-cell {
+    fill: transparent;
+    stroke: var(--bs-secondary);
+    stroke-width: 0.05;
+    cursor: pointer;
+}
+
+/* Form styling for role selection */
+form {
+    background-color: #f0f0f0; /* Light grey background for the form */
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown styling */
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Submit button styling */
+button {
+    background-color: #4CAF50; /* Green color for the button */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #45a049; /* Slightly darker green for hover */
+}
+
+/* General text styling */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #e9ecef; /* Light grey for page background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+}
+
+label {
+    font-size: 16px;
+    color: #555;
+}
