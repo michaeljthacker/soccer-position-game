@@ -160,6 +160,8 @@ class PlayerManager {
         } else {
             idealPosition = this.userPlayer.calculateIdealPosition(this.ball.x, this.ball.y);
         }
+        idealPosition.x = clamp(idealPosition.x, 0, 100);
+        idealPosition.y = clamp(idealPosition.y, 0, 100);
 
         // Create a new marker element
         const marker = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
