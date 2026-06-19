@@ -2,6 +2,10 @@
 import { Field } from './Field.js';
 import { PlayerManager } from './PlayerManager.js';
 import { Ball } from './Ball.js';
+import { init, pageView, track } from 'https://analytics.mjt.pub/analytics.js';
+
+init({ site: 'soccer.mjt.pub', writeKey: 'htb2LQmdYzOtUofWGVt7WjXGLiNf9yfgHMPEDYqPXiE' });
+pageView();
 
 let userAttackDirection; // Public constant for attack direction
 let currentTurn = 1; // Initial turn
@@ -23,6 +27,7 @@ document.getElementById('role-selection-form').addEventListener('submit', functi
         document.getElementById('start-screen').classList.add('d-none');
         document.getElementById('game-screen').classList.remove('d-none');
         document.getElementById('selected-role').innerText = selectedUserRole;
+        track('start_game', { state: { role: selectedUserRole } });
         startGame();
     } else {
         alert('Please select a role.');
@@ -182,6 +187,7 @@ document.getElementById('finish-game').addEventListener('click', finishGame);
 
 // Add event listener for the "New Game" button
 document.getElementById('new-game').addEventListener('click', () => {
+    track('new_game', { state: { role: selectedUserRole, score: playerManager.getTotalScore() } });
     location.reload();
 });
 
